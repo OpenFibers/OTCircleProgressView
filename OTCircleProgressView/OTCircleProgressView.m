@@ -248,10 +248,8 @@
 
 + (CGFloat)normalizeCircleAngle:(CGFloat)circleAngle
 {
-    const static CGFloat circle = M_PI * 2;
-    int circleCount = round(circleAngle / circle);
-    CGFloat normalizedCircleAngle = circleAngle - circleCount * circle;
-    return normalizedCircleAngle;
+    CGFloat normalizedAngle = MIN(MAX(circleAngle, 0), M_PI * 2);
+    return normalizedAngle;
 }
 
 @end

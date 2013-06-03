@@ -25,6 +25,7 @@
     _circleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(120, 100, 80, 80)];
     _circleProgressView.roundedCorners = YES;
     _circleProgressView.beginPoint = 5 * M_PI_4;
+    _circleProgressView.circleLength = 5 * M_PI_4;
     [self.view addSubview:_circleProgressView];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5f
