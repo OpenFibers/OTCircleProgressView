@@ -11,11 +11,12 @@
 
 @interface OTCircularProgressLayer : CALayer
 
-@property(nonatomic, strong) UIColor *trackTintColor;
-@property(nonatomic, strong) UIColor *progressTintColor;
-@property(nonatomic) NSInteger roundedCorners;
-@property(nonatomic) CGFloat thicknessRatio;
-@property(nonatomic) CGFloat progress;
+@property (nonatomic, strong) UIColor *trackTintColor;
+@property (nonatomic, strong) UIColor *progressTintColor;
+@property (nonatomic) NSInteger roundedCorners;
+@property (nonatomic) CGFloat thicknessRatio;
+@property (nonatomic) CGFloat progress;
+@property (nonatomic) CGFloat circleLength;
 
 @end
 
@@ -86,6 +87,8 @@
 @end
 
 @implementation OTCircleProgressView
+@synthesize beginPoint = _beginPoint;
+@synthesize circleLength = _circleLength;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -226,8 +229,15 @@
 
 - (void)setBeginPoint:(CGFloat)beginPoint
 {
+    _beginPoint = beginPoint;
     CGAffineTransform t = CGAffineTransformMakeRotation(beginPoint);
     self.transform = t;
+}
+
+- (void)setCircleLength:(CGFloat)circleLength
+{
+    _circleLength = circleLength;
+    [self.circularProgressLayer setNeedsDisplay];
 }
 
 @end
