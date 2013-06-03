@@ -280,6 +280,7 @@
 + (CGFloat)normalizeCircleAngle:(CGFloat)circleAngle
 {
     CGFloat normalizedAngle = MIN(MAX(circleAngle, 0), M_PI * 2);
+    normalizedAngle = (normalizedAngle == 0 ? M_PI * 2 : normalizedAngle);
     return normalizedAngle;
 }
 

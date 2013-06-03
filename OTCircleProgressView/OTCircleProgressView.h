@@ -22,7 +22,7 @@
 //Set the begin point of ciculation [0, 2 * PI]
 @property (nonatomic, assign) CGFloat beginRadians;
 
-//Set the circle length of ciculation [0, 2 * PI]
+//Set the circle length of ciculation (0, 2 * PI]
 @property (nonatomic, assign) CGFloat trackRadians;
 
 @property (nonatomic, assign) CGFloat progress;
