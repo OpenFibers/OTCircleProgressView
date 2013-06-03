@@ -19,6 +19,7 @@
     OTCircleProgressView *_circleProgressView;
     OTCircleProgressView *_solidCircleProgressView;
     OTCircleProgressView *_sectorCircleProgressView;
+    UILabel *_progressLabel;
     NSTimer *_timer;
 }
 
@@ -30,6 +31,14 @@
     _halfCircleProgressView.beginRadians = 5 * M_PI_4;
     _halfCircleProgressView.trackRadians = 5 * M_PI_4;
     [self.view addSubview:_halfCircleProgressView];
+    
+    _progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(84, 100, 40, 40)];
+    _progressLabel.backgroundColor = [UIColor blackColor];
+    _progressLabel.textColor = [UIColor whiteColor];
+    _progressLabel.font = [UIFont boldSystemFontOfSize:20.0f];
+    _progressLabel.textAlignment = UITextAlignmentCenter;
+    _progressLabel.text = @"0";
+    [self.view addSubview:_progressLabel];
     
     _circleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(180, 40, 100, 100)];
     _circleProgressView.roundedCorners = YES;
@@ -82,6 +91,8 @@
             [progressView setProgress:progress animated:YES];
         }
     }
+    
+    _progressLabel.text = [NSString stringWithFormat:@"%d", (int)(100 * _halfCircleProgressView.progress)];
 }
 
 - (void)indeterminate
