@@ -17,7 +17,8 @@
 		42BFF446175C8659007979C1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42BFF445175C8659007979C1 /* Default@2x.png */; };
 		42BFF448175C8659007979C1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 42BFF447175C8659007979C1 /* Default-568h@2x.png */; };
 		42BFF44B175C8659007979C1 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BFF44A175C8659007979C1 /* ViewController.m */; };
-		42BFF44E175C8659007979C1 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 42BFF44C175C8659007979C1 /* ViewController.xib */; };
+		42BFF457175C869B007979C1 /* OTCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 42BFF456175C869B007979C1 /* OTCircleProgressView.m */; };
+		42F192CF175C86F00025D0B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F192CE175C86F00025D0B3 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,7 +37,9 @@
 		42BFF447175C8659007979C1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		42BFF449175C8659007979C1 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		42BFF44A175C8659007979C1 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		42BFF44D175C8659007979C1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		42BFF455175C869B007979C1 /* OTCircleProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OTCircleProgressView.h; sourceTree = "<group>"; };
+		42BFF456175C869B007979C1 /* OTCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OTCircleProgressView.m; sourceTree = "<group>"; };
+		42F192CE175C86F00025D0B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F192CF175C86F00025D0B3 /* QuartzCore.framework in Frameworks */,
 				42BFF432175C8659007979C1 /* UIKit.framework in Frameworks */,
 				42BFF434175C8659007979C1 /* Foundation.framework in Frameworks */,
 				42BFF436175C8659007979C1 /* CoreGraphics.framework in Frameworks */,
@@ -56,7 +60,9 @@
 		42BFF425175C8659007979C1 = {
 			isa = PBXGroup;
 			children = (
+				42F192CE175C86F00025D0B3 /* QuartzCore.framework */,
 				42BFF437175C8659007979C1 /* OTCircleProgressViewDemo */,
+				42BFF454175C8690007979C1 /* OTCircleProgressView */,
 				42BFF430175C8659007979C1 /* Frameworks */,
 				42BFF42F175C8659007979C1 /* Products */,
 			);
@@ -87,7 +93,6 @@
 				42BFF441175C8659007979C1 /* AppDelegate.m */,
 				42BFF449175C8659007979C1 /* ViewController.h */,
 				42BFF44A175C8659007979C1 /* ViewController.m */,
-				42BFF44C175C8659007979C1 /* ViewController.xib */,
 				42BFF438175C8659007979C1 /* Supporting Files */,
 			);
 			path = OTCircleProgressViewDemo;
@@ -105,6 +110,15 @@
 				42BFF447175C8659007979C1 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		42BFF454175C8690007979C1 /* OTCircleProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				42BFF455175C869B007979C1 /* OTCircleProgressView.h */,
+				42BFF456175C869B007979C1 /* OTCircleProgressView.m */,
+			);
+			path = OTCircleProgressView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,7 +176,6 @@
 				42BFF444175C8659007979C1 /* Default.png in Resources */,
 				42BFF446175C8659007979C1 /* Default@2x.png in Resources */,
 				42BFF448175C8659007979C1 /* Default-568h@2x.png in Resources */,
-				42BFF44E175C8659007979C1 /* ViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,6 +189,7 @@
 				42BFF43E175C8659007979C1 /* main.m in Sources */,
 				42BFF442175C8659007979C1 /* AppDelegate.m in Sources */,
 				42BFF44B175C8659007979C1 /* ViewController.m in Sources */,
+				42BFF457175C869B007979C1 /* OTCircleProgressView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,14 +202,6 @@
 				42BFF43B175C8659007979C1 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		42BFF44C175C8659007979C1 /* ViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				42BFF44D175C8659007979C1 /* en */,
-			);
-			name = ViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -298,6 +304,7 @@
 				42BFF453175C8659007979C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
