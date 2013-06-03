@@ -36,15 +36,19 @@
 {
     CGRect rect = self.bounds;
     CGPoint centerPoint = CGPointMake(rect.size.height / 2.0f, rect.size.width / 2.0f);
+    
+    //Circle radius
     CGFloat radius = MIN(rect.size.height, rect.size.width) / 2.0f;
     
-    CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
-    CGFloat radians = (progress * 2.0f * M_PI) - M_PI_2;
-    
+    //Track radians
     CGFloat trackRadians = ((OTCircleProgressView *)self.delegate).circleLength;
     
+    //Progress radians
+    CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
+    CGFloat progressRadians = (progress * trackRadians) - M_PI_2;
+    
     //Swap 2 * M_PI with 0, since 2 * pi will draw as 0, 0 will draw as 2 * pi
-    if (abs(trackRadians - 2 * M_PI) < 0.00000001f)//2 * M_PI is not alway equal to 2 * M_PI due to intensive lost
+    if (abs(trackRadians - 2 * M_PI) < FLT_EPSILON)//2 * M_PI is not alway equal to 2 * M_PI due to intensive lost
     {
         trackRadians = 0;
     }
@@ -84,7 +88,7 @@
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
         CGMutablePathRef progressPath = CGPathCreateMutable();
         CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
-        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, radians, NO);
+        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, progressRadians, NO);
         CGPathCloseSubpath(progressPath);
         CGContextAddPath(context, progressPath);
         CGPathRelease(progressPath);
@@ -94,8 +98,8 @@
     if (progress > 0.0f && self.roundedCorners)
     {
         CGFloat pathWidth = radius * self.thicknessRatio;
-        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(radians)));
-        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(radians)));
+        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(progressRadians)));
+        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(progressRadians)));
         CGPoint endPoint = CGPointMake(xOffset, yOffset);
         
         CGContextAddEllipseInRect(context, CGRectMake(centerPoint.x - pathWidth / 2.0f, 0.0f, pathWidth, pathWidth));        
