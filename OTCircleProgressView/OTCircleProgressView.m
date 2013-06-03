@@ -42,6 +42,7 @@
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
     CGFloat radians = (progress * 2.0f * M_PI) - M_PI_2;
     
+    //track
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
     CGMutablePathRef trackPath = CGPathCreateMutable();
     CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
@@ -51,6 +52,7 @@
     CGContextFillPath(context);
     CGPathRelease(trackPath);
     
+    //progress
     if (progress > 0.0f)
     {
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
@@ -63,6 +65,7 @@
         CGPathRelease(progressPath);
     }
     
+    //if progress has rounded corners, add ellipse to it.
     if (progress > 0.0f && self.roundedCorners)
     {
         CGFloat pathWidth = radius * self.thicknessRatio;
@@ -230,14 +233,25 @@
 - (void)setBeginPoint:(CGFloat)beginPoint
 {
     _beginPoint = beginPoint;
-    CGAffineTransform t = CGAffineTransformMakeRotation(beginPoint);
+    CGFloat normalizedBeginPoint = [OTCircleProgressView normalizeCircleAngle:beginPoint];
+    CGAffineTransform t = CGAffineTransformMakeRotation(normalizedBeginPoint);
     self.transform = t;
 }
 
 - (void)setCircleLength:(CGFloat)circleLength
 {
     _circleLength = circleLength;
+    CGFloat normalizedCircleLength = [OTCircleProgressView normalizeCircleAngle:circleLength];
+    self.circularProgressLayer.circleLength = normalizedCircleLength;
     [self.circularProgressLayer setNeedsDisplay];
+}
+
++ (CGFloat)normalizeCircleAngle:(CGFloat)circleAngle
+{
+    const static CGFloat circle = M_PI * 2;
+    int circleCount = round(circleAngle / circle);
+    CGFloat normalizedCircleAngle = circleAngle - circleCount * circle;
+    return normalizedCircleAngle;
 }
 
 @end

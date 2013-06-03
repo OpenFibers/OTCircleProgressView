@@ -36,7 +36,7 @@
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:@"indeterminate" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(indeterminate) forControlEvents:UIControlEventTouchUpInside];
-    button.frame = CGRectMake(120, 200, 80, 44);
+    button.frame = CGRectMake(100, 200, 120, 44);
     [self.view addSubview:button];
 }
 
