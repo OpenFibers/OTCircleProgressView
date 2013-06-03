@@ -267,7 +267,7 @@
     CGFloat normalizedBeginPoint = [OTCircleProgressView normalizeCircleAngle:beginPoint];
     _beginRadians = normalizedBeginPoint;
     CGAffineTransform t = CGAffineTransformMakeRotation(normalizedBeginPoint);
-    self.transform = t;
+    self.layer.transform = CATransform3DMakeAffineTransform(t);
 }
 
 - (void)setTrackRadians:(CGFloat)circleLength
