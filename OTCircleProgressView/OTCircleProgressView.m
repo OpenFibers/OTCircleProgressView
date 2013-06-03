@@ -16,7 +16,6 @@
 @property (nonatomic) NSInteger roundedCorners;
 @property (nonatomic) CGFloat thicknessRatio;
 @property (nonatomic) CGFloat progress;
-@property (nonatomic) CGFloat circleLength;
 
 @end
 
@@ -41,12 +40,13 @@
     
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
     CGFloat radians = (progress * 2.0f * M_PI) - M_PI_2;
+    CGFloat trackRadians = 3 * M_PI_2 - ((OTCircleProgressView *)self.delegate).circleLength;
     
     //track
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
     CGMutablePathRef trackPath = CGPathCreateMutable();
     CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
-    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, -M_PI_2, NO);
+    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, trackRadians, NO);
     CGPathCloseSubpath(trackPath);
     CGContextAddPath(context, trackPath);
     CGContextFillPath(context);
@@ -106,6 +106,8 @@
         
         [self setIndeterminateDuration:2.0f];
         [self setIndeterminate:NO];
+        
+        [self setCircleLength:2 * M_PI];
     }
     return self;
 }
@@ -232,17 +234,16 @@
 
 - (void)setBeginPoint:(CGFloat)beginPoint
 {
-    _beginPoint = beginPoint;
     CGFloat normalizedBeginPoint = [OTCircleProgressView normalizeCircleAngle:beginPoint];
+    _beginPoint = normalizedBeginPoint;
     CGAffineTransform t = CGAffineTransformMakeRotation(normalizedBeginPoint);
     self.transform = t;
 }
 
 - (void)setCircleLength:(CGFloat)circleLength
 {
-    _circleLength = circleLength;
     CGFloat normalizedCircleLength = [OTCircleProgressView normalizeCircleAngle:circleLength];
-    self.circularProgressLayer.circleLength = normalizedCircleLength;
+    _circleLength = normalizedCircleLength;
     [self.circularProgressLayer setNeedsDisplay];
 }
 
