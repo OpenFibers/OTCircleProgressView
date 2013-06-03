@@ -40,7 +40,19 @@
     
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
     CGFloat radians = (progress * 2.0f * M_PI) - M_PI_2;
-    CGFloat trackRadians = 3 * M_PI_2 - ((OTCircleProgressView *)self.delegate).circleLength;
+    
+    CGFloat trackRadians = ((OTCircleProgressView *)self.delegate).circleLength;
+    
+    //Swap 2 * M_PI with 0, since 2 * pi will draw as 0, 0 will draw as 2 * pi
+    if (abs(trackRadians - 2 * M_PI) < 0.00000001f)//2 * M_PI is not alway equal to 2 * M_PI due to intensive lost
+    {
+        trackRadians = 0;
+    }
+    else if (trackRadians == 0)
+    {
+        trackRadians = M_PI * 2;
+    }
+    trackRadians -= M_PI_2;
     
     //Add track path
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
