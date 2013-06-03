@@ -24,8 +24,8 @@
     [super viewDidLoad];
     _circleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(120, 100, 80, 80)];
     _circleProgressView.roundedCorners = YES;
-    _circleProgressView.beginPoint = 5 * M_PI_4;
-    _circleProgressView.circleLength = 5 * M_PI_4;
+    _circleProgressView.beginRadians = 5 * M_PI_4;
+    _circleProgressView.trackRadians = 5 * M_PI_4;
     [self.view addSubview:_circleProgressView];
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:0.5f
@@ -48,8 +48,12 @@
     if (progress > 1)
     {
         progress = 0;
+        [_circleProgressView setProgress:progress animated:NO];
     }
-    [_circleProgressView setProgress:progress animated:YES];
+    else
+    {
+        [_circleProgressView setProgress:progress animated:YES];
+    }
 }
 
 - (void)indeterminate

@@ -41,7 +41,7 @@
     CGFloat radius = MIN(rect.size.height, rect.size.width) / 2.0f;
     
     //Track radians
-    CGFloat trackRadians = ((OTCircleProgressView *)self.delegate).circleLength;
+    CGFloat trackRadians = ((OTCircleProgressView *)self.delegate).trackRadians;
     
     //Progress radians
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
@@ -120,8 +120,8 @@
 @end
 
 @implementation OTCircleProgressView
-@synthesize beginPoint = _beginPoint;
-@synthesize circleLength = _circleLength;
+@synthesize beginRadians = _beginRadians;
+@synthesize trackRadians = _trackRadians;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -137,7 +137,7 @@
         [self setIndeterminateDuration:2.0f];
         [self setIndeterminate:NO];
         
-        [self setCircleLength:2 * M_PI];
+        [self setTrackRadians:2 * M_PI];
     }
     return self;
 }
@@ -262,18 +262,18 @@
     }
 }
 
-- (void)setBeginPoint:(CGFloat)beginPoint
+- (void)setBeginRadians:(CGFloat)beginPoint
 {
     CGFloat normalizedBeginPoint = [OTCircleProgressView normalizeCircleAngle:beginPoint];
-    _beginPoint = normalizedBeginPoint;
+    _beginRadians = normalizedBeginPoint;
     CGAffineTransform t = CGAffineTransformMakeRotation(normalizedBeginPoint);
     self.transform = t;
 }
 
-- (void)setCircleLength:(CGFloat)circleLength
+- (void)setTrackRadians:(CGFloat)circleLength
 {
     CGFloat normalizedCircleLength = [OTCircleProgressView normalizeCircleAngle:circleLength];
-    _circleLength = normalizedCircleLength;
+    _trackRadians = normalizedCircleLength;
     [self.circularProgressLayer setNeedsDisplay];
 }
 

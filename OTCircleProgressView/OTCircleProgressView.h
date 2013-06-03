@@ -20,10 +20,10 @@
 @property (nonatomic, assign) CGFloat indeterminateDuration;
 
 //Set the begin point of ciculation [0, 2 * PI]
-@property (nonatomic, assign) CGFloat beginPoint;
+@property (nonatomic, assign) CGFloat beginRadians;
 
 //Set the circle length of ciculation [0, 2 * PI]
-@property (nonatomic, assign) CGFloat circleLength;
+@property (nonatomic, assign) CGFloat trackRadians;
 
 @property (nonatomic, assign) CGFloat progress;
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
