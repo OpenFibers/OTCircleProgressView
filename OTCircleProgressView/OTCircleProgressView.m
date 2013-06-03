@@ -123,6 +123,7 @@
 @synthesize beginRadians = _beginRadians;
 @synthesize trackRadians = _trackRadians;
 
+//Designated initializer
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -138,8 +139,25 @@
         [self setIndeterminate:NO];
         
         [self setTrackRadians:2 * M_PI];
+        
+        [self setFrame:frame];
     }
     return self;
+}
+
+//Secondary initializer
+- (id)init
+{
+    self = [self initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
+    return self;
+}
+
+//Forcely set height same as width, to avoid draw disorder
+- (void)setFrame:(CGRect)frame
+{
+    CGRect newFrame = frame;
+    newFrame.size.height = newFrame.size.width;
+    [super setFrame:newFrame];
 }
 
 + (Class)layerClass
@@ -150,11 +168,6 @@
 - (OTCircularProgressLayer *)circularProgressLayer
 {
     return (OTCircularProgressLayer *)self.layer;
-}
-
-- (id)init
-{
-    return [super initWithFrame:CGRectMake(0.0f, 0.0f, 40.0f, 40.0f)];
 }
 
 - (void)didMoveToWindow
