@@ -224,5 +224,10 @@
     }
 }
 
+- (void)setBeginPoint:(CGFloat)beginPoint
+{
+    CGAffineTransform t = CGAffineTransformMakeRotation(beginPoint);
+    self.transform = t;
+}
 
 @end

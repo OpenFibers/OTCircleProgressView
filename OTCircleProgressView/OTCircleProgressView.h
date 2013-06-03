@@ -20,7 +20,7 @@
 @property (nonatomic, assign) CGFloat indeterminateDuration;
 
 @property (nonatomic, assign) CGFloat beginPoint;
-@property (nonatomic, assign) CGFloat endPoint;
+@property (nonatomic, assign) CGFloat circleLength;
 
 @property (nonatomic, assign) CGFloat progress;
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
