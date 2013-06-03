@@ -19,7 +19,10 @@
 @property (nonatomic, assign) BOOL indeterminate;
 @property (nonatomic, assign) CGFloat indeterminateDuration;
 
+//Set the begin point of ciculation [0, 2 * PI]
 @property (nonatomic, assign) CGFloat beginPoint;
+
+//Set the circle length of ciculation [0, 2 * PI]
 @property (nonatomic, assign) CGFloat circleLength;
 
 @property (nonatomic, assign) CGFloat progress;
