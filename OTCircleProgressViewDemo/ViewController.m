@@ -105,6 +105,15 @@
     {
         progressView.indeterminate = !progressView.indeterminate;
     }
+    
+    if (_halfCircleProgressView.indeterminate)
+    {
+        _progressLabel.frame = CGRectMake(70, 70, 40, 40);
+    }
+    else
+    {
+        _progressLabel.frame = CGRectMake(95, 106, 40, 40);
+    }
 }
 
 @end
