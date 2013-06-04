@@ -28,11 +28,11 @@
     [super viewDidLoad];
     _halfCircleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(40, 40, 100, 100)];
     _halfCircleProgressView.roundedCorners = YES;
-    _halfCircleProgressView.beginRadians = 5 * M_PI_4;
-    _halfCircleProgressView.trackRadians = 5 * M_PI_4;
+    _halfCircleProgressView.beginRadians = 4.4 * M_PI_4;
+    _halfCircleProgressView.trackRadians = 5.6 * M_PI_4;
     [self.view addSubview:_halfCircleProgressView];
     
-    _progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(84, 100, 40, 40)];
+    _progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(95, 106, 40, 40)];
     _progressLabel.backgroundColor = [UIColor blackColor];
     _progressLabel.textColor = [UIColor whiteColor];
     _progressLabel.font = [UIFont boldSystemFontOfSize:20.0f];

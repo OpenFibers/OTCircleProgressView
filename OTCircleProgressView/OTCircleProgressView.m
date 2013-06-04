@@ -40,6 +40,9 @@
     //Circle radius
     CGFloat radius = MIN(rect.size.height, rect.size.width) / 2.0f;
     
+    //Begin radians
+    CGFloat beginRadians = ((OTCircleProgressView *)self.delegate).beginRadians;
+    
     //Track radians
     CGFloat trackRadians = ((OTCircleProgressView *)self.delegate).trackRadians;
     
@@ -62,7 +65,7 @@
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
     CGMutablePathRef trackPath = CGPathCreateMutable();
     CGPathMoveToPoint(trackPath, NULL, centerPoint.x, centerPoint.y);
-    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, trackRadians, NO);
+    CGPathAddArc(trackPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2 + beginRadians, trackRadians + beginRadians, NO);
     CGPathCloseSubpath(trackPath);
     CGContextAddPath(context, trackPath);
     CGPathRelease(trackPath);
@@ -71,11 +74,19 @@
     if (self.roundedCorners)
     {
         CGFloat pathWidth = radius * self.thicknessRatio;
-        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(trackRadians)));
-        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(trackRadians)));
+        
+        CGFloat xBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(3.0f * M_PI_2 + beginRadians)));
+        CGFloat yBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(3.0f * M_PI_2 + beginRadians)));
+        CGPoint beginPoint = CGPointMake(xBegin, yBegin);
+        
+        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(beginRadians + trackRadians)));
+        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(beginRadians + trackRadians)));
         CGPoint endPoint = CGPointMake(xOffset, yOffset);
         
-        CGContextAddEllipseInRect(context, CGRectMake(centerPoint.x - pathWidth / 2.0f, 0.0f, pathWidth, pathWidth));
+        //End round point's path of progress
+        CGContextAddEllipseInRect(context, CGRectMake(beginPoint.x - pathWidth / 2.0f, beginPoint.y - pathWidth / 2.0f, pathWidth, pathWidth));
+        
+        //End round point's path of progress
         CGContextAddEllipseInRect(context, CGRectMake(endPoint.x - pathWidth / 2.0f, endPoint.y - pathWidth / 2.0f, pathWidth, pathWidth));
     }
     
@@ -88,7 +99,7 @@
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
         CGMutablePathRef progressPath = CGPathCreateMutable();
         CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
-        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2, progressRadians, NO);
+        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2 + beginRadians, progressRadians + beginRadians, NO);
         CGPathCloseSubpath(progressPath);
         CGContextAddPath(context, progressPath);
         CGPathRelease(progressPath);
@@ -98,11 +109,19 @@
     if (progress > 0.0f && self.roundedCorners)
     {
         CGFloat pathWidth = radius * self.thicknessRatio;
-        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(progressRadians)));
-        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(progressRadians)));
+        
+        CGFloat xBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(3.0f * M_PI_2 + beginRadians)));
+        CGFloat yBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(3.0f * M_PI_2 + beginRadians)));
+        CGPoint beginPoint = CGPointMake(xBegin, yBegin);
+
+        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(beginRadians + progressRadians)));
+        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(beginRadians + progressRadians)));
         CGPoint endPoint = CGPointMake(xOffset, yOffset);
         
-        CGContextAddEllipseInRect(context, CGRectMake(centerPoint.x - pathWidth / 2.0f, 0.0f, pathWidth, pathWidth));        
+        //Begin round point's path of progress
+        CGContextAddEllipseInRect(context, CGRectMake(beginPoint.x - pathWidth / 2.0f, beginPoint.y - pathWidth / 2.0f, pathWidth, pathWidth));
+        
+        //End round point's path of progress
         CGContextAddEllipseInRect(context, CGRectMake(endPoint.x - pathWidth / 2.0f, endPoint.y - pathWidth / 2.0f, pathWidth, pathWidth));
     }
     
@@ -279,8 +298,6 @@
 {
     CGFloat normalizedBeginPoint = [OTCircleProgressView normalizeCircleAngle:beginPoint];
     _beginRadians = normalizedBeginPoint;
-    CGAffineTransform t = CGAffineTransformMakeRotation(normalizedBeginPoint);
-    self.layer.transform = CATransform3DMakeAffineTransform(t);
 }
 
 - (void)setTrackRadians:(CGFloat)circleLength
