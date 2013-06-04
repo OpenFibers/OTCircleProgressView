@@ -1,4 +1,5 @@
-OSInjectionProject/
+iOSInjectionProject/
 *.xcodeproj/project.xcworkspace/
 *.xcodeproj/xcuserdata/
+*.save
 .DS_Store
