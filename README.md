@@ -1,4 +1,4 @@
-#OTCircleProgress
+#OTCircleProgressView
 
 A circle progress view for iOS. Supports half circle.
 
