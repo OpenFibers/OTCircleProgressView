@@ -26,6 +26,12 @@
 @property (nonatomic, assign) CGFloat trackRadians;
 
 @property (nonatomic, assign) CGFloat progress;
+
+//If animated, animates same duration as UIProgressView animation, easy in out.
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated;
+
+//If animated and `animationDuration` is negative, animates same duration as UIProgressView animation, animate curve is easy in out.
+//If animated and `animationDuration` is positive, animates for animationDuration, animate curve is linear.
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated animationDuration:(NSTimeInterval)animationDuration;
 
 @end

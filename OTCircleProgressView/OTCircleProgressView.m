@@ -209,12 +209,26 @@
 
 - (void)setProgress:(CGFloat)progress animated:(BOOL)animated
 {
+    [self setProgress:progress animated:animated animationDuration:-1];
+}
+
+- (void)setProgress:(CGFloat)progress animated:(BOOL)animated animationDuration:(NSTimeInterval)animationDuration
+{
     CGFloat pinnedProgress = MIN(MAX(progress, 0.0f), 1.0f);
     if (animated)
     {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"progress"];
-        animation.duration = fabsf(self.progress - pinnedProgress); // Same duration as UIProgressView animation
-        animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        if (animationDuration > 0)
+        {
+            animation.duration = animationDuration;
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+        }
+        else
+        {
+            // Same duration as UIProgressView animation
+            animation.duration = fabsf(self.progress - pinnedProgress);
+            animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        }
         animation.fromValue = [NSNumber numberWithFloat:self.progress];
         animation.toValue = [NSNumber numberWithFloat:pinnedProgress];
         [self.circularProgressLayer addAnimation:animation forKey:@"progress"];
