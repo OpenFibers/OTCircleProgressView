@@ -11,13 +11,15 @@
 
 @interface OTCircleProgressView : UIView
 
-@property (nonatomic, retain) UIColor *trackTintColor;
-@property (nonatomic, retain) UIColor *progressTintColor;
-@property (nonatomic, assign) BOOL roundedCorners;
+@property (nonatomic, retain) UIColor *trackTintColor;//Change track color
+@property (nonatomic, retain) UIColor *progressTintColor;//Change progress color
+@property (nonatomic, assign) BOOL roundedCorners;//Set whether track has roundedCorners
+
+//Change annulus thickness [0, 1]
 @property (nonatomic, assign) CGFloat thicknessRatio;
 
-@property (nonatomic, assign) BOOL indeterminate;
-@property (nonatomic, assign) CGFloat indeterminateDuration;
+@property (nonatomic, assign) BOOL indeterminate;//Set whether track rotate
+@property (nonatomic, assign) CGFloat indeterminateDuration;//Set track rotate duration
 
 //Set the begin point of ciculation [0, 2 * PI]
 @property (nonatomic, assign) CGFloat beginRadians;
