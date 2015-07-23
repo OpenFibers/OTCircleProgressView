@@ -12,7 +12,12 @@
 @interface OTCircleProgressView : UIView
 
 @property (nonatomic, retain) UIColor *trackTintColor;//Change track color
-@property (nonatomic, retain) UIColor *progressTintColor;//Change progress color
+
+/**
+ *  Change progress color.
+ *  If progressTintColor is clear, the progress will clears track (countdown style).
+ */
+@property (nonatomic, retain) UIColor *progressTintColor;
 @property (nonatomic, assign) BOOL roundedCorners;//Set whether track has roundedCorners
 
 //Change annulus thickness [0, 1]
