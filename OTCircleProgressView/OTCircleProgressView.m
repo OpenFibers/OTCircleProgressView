@@ -226,7 +226,7 @@
         else
         {
             // Same duration as UIProgressView animation
-            animation.duration = fabsf(self.progress - pinnedProgress);
+            animation.duration = fabs(self.progress - pinnedProgress);
             animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
         }
         animation.fromValue = [NSNumber numberWithFloat:self.progress];
