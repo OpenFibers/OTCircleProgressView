@@ -51,7 +51,7 @@
     CGFloat progressRadians = (progress * trackRadians) - M_PI_2;
     
     //Swap 2 * M_PI with 0, since 2 * pi will draw as 0, 0 will draw as 2 * pi
-    if (abs(trackRadians - 2 * M_PI) < FLT_EPSILON)//2 * M_PI is not alway equal to 2 * M_PI due to intensive lost
+    if (fabs(trackRadians - 2 * M_PI) < FLT_EPSILON)//2 * M_PI is not alway equal to 2 * M_PI due to intensive lost
     {
         trackRadians = 0;
     }
