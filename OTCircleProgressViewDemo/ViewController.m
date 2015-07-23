@@ -17,7 +17,7 @@
 {
     OTCircleProgressView *_halfCircleProgressView;
     OTCircleProgressView *_circleProgressView;
-    OTCircleProgressView *_solidCircleProgressView;
+    OTCircleProgressView *_countDownProgressView;
     OTCircleProgressView *_sectorCircleProgressView;
     UILabel *_progressLabel;
     NSTimer *_timer;
@@ -33,7 +33,7 @@
     [self.view addSubview:_halfCircleProgressView];
     
     _progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(95, 106, 40, 40)];
-    _progressLabel.backgroundColor = [UIColor blackColor];
+    _progressLabel.backgroundColor = [UIColor clearColor];
     _progressLabel.textColor = [UIColor whiteColor];
     _progressLabel.font = [UIFont boldSystemFontOfSize:20.0f];
     _progressLabel.textAlignment = UITextAlignmentCenter;
@@ -44,10 +44,11 @@
     _circleProgressView.roundedCorners = YES;
     [self.view addSubview:_circleProgressView];
     
-    _solidCircleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(40, 180, 100, 100)];
-    _solidCircleProgressView.roundedCorners = NO;
-    _solidCircleProgressView.thicknessRatio = 1.0f;
-    [self.view addSubview:_solidCircleProgressView];
+    _countDownProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(40, 180, 100, 100)];
+    _countDownProgressView.roundedCorners = NO;
+    _countDownProgressView.thicknessRatio = 1.0f;
+    _countDownProgressView.progressTintColor = [UIColor clearColor];
+    [self.view addSubview:_countDownProgressView];
     
     _sectorCircleProgressView = [[OTCircleProgressView alloc] initWithFrame:CGRectMake(180, 180, 100, 100)];
     _sectorCircleProgressView.roundedCorners = NO;
@@ -75,7 +76,7 @@
 {
     NSArray *progressViewArray = @[_halfCircleProgressView,
                                    _circleProgressView,
-                                   _solidCircleProgressView,
+                                   _countDownProgressView,
                                    _sectorCircleProgressView];
     for (OTCircleProgressView *progressView in progressViewArray)
     {
@@ -99,7 +100,7 @@
 {
     NSArray *progressViewArray = @[_halfCircleProgressView,
                                    _circleProgressView,
-                                   _solidCircleProgressView,
+                                   _countDownProgressView,
                                    _sectorCircleProgressView];
     for (OTCircleProgressView *progressView in progressViewArray)
     {
