@@ -48,7 +48,7 @@
     
     //Progress radians
     CGFloat progress = MIN(self.progress, 1.0f - FLT_EPSILON);
-    CGFloat progressRadians = (progress * trackRadians) - M_PI_2;
+    CGFloat progressRadians = (progress * trackRadians);
     
     if (trackRadians > M_PI * 2)
     {
@@ -90,13 +90,16 @@
     //Draw track path
     CGContextFillPath(context);
 
+    CGFloat progressBeginAngel = 3.0f * M_PI_2 + beginRadians;
+    CGFloat progressEndAngel = progressBeginAngel + progressRadians;
+    
     //Add progress path
     if (progress > 0.0f)
     {
         CGContextSetFillColorWithColor(context, self.progressTintColor.CGColor);
         CGMutablePathRef progressPath = CGPathCreateMutable();
         CGPathMoveToPoint(progressPath, NULL, centerPoint.x, centerPoint.y);
-        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, 3.0f * M_PI_2 + beginRadians, progressRadians + beginRadians, NO);
+        CGPathAddArc(progressPath, NULL, centerPoint.x, centerPoint.y, radius, progressBeginAngel, progressEndAngel, NO);
         CGPathCloseSubpath(progressPath);
         CGContextAddPath(context, progressPath);
         CGPathRelease(progressPath);
@@ -107,12 +110,12 @@
     {
         CGFloat pathWidth = radius * self.thicknessRatio;
         
-        CGFloat xBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(3.0f * M_PI_2 + beginRadians)));
-        CGFloat yBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(3.0f * M_PI_2 + beginRadians)));
+        CGFloat xBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(progressBeginAngel)));
+        CGFloat yBegin = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(progressBeginAngel)));
         CGPoint beginPoint = CGPointMake(xBegin, yBegin);
 
-        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(beginRadians + progressRadians)));
-        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(beginRadians + progressRadians)));
+        CGFloat xOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * cosf(progressEndAngel)));
+        CGFloat yOffset = radius * (1.0f + ((1.0f - (self.thicknessRatio / 2.0f)) * sinf(progressEndAngel)));
         CGPoint endPoint = CGPointMake(xOffset, yOffset);
         
         //Begin round point's path of progress
