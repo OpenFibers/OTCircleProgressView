@@ -55,8 +55,17 @@
         trackRadians = M_PI * 2;
     }
     
+    CGFloat progressBeginAngel = 3.0f * M_PI_2 + beginRadians;
+    CGFloat progressEndAngel = progressBeginAngel + progressRadians;
+
     CGFloat trackBeginAngel = 3.0f * M_PI_2 + beginRadians;
     CGFloat trackEndAngel = trackBeginAngel + trackRadians;
+    
+    //If progress color is clear, progress clears track
+    if ([self.progressTintColor isEqual:[UIColor clearColor]])
+    {
+        trackBeginAngel = progressEndAngel;
+    }
     
     //Add track path
     CGContextSetFillColorWithColor(context, self.trackTintColor.CGColor);
@@ -89,9 +98,6 @@
     
     //Draw track path
     CGContextFillPath(context);
-
-    CGFloat progressBeginAngel = 3.0f * M_PI_2 + beginRadians;
-    CGFloat progressEndAngel = progressBeginAngel + progressRadians;
     
     //Add progress path
     if (progress > 0.0f)
